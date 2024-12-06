@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import '../model/new_model.dart'; // Adjust path if needed
+import '../model/new_model.dart'; 
 
 class NewsDetail extends StatelessWidget {
   final NewsModel newsModel;
 
   const NewsDetail({Key? key, required this.newsModel}) : super(key: key);
 
-  // Helper method to format time into "time ago" format
   String getTimeAgo(String? publishedAt) {
     if (publishedAt == null) return "Unknown";
     try {
@@ -22,25 +21,24 @@ class NewsDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green, // Consistent color for the app bar
+        backgroundColor: Colors.green, 
         title: const Text(
           "News Details",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white), // Set title text color to white
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white), 
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white), // White back arrow
+          icon: const Icon(Icons.arrow_back, color: Colors.white), 
           onPressed: () {
-            Navigator.pop(context); // Navigate back to the previous page
+            Navigator.pop(context); 
           },
         ),
-        iconTheme: const IconThemeData(color: Colors.white), // Ensure consistent icon color
+        iconTheme: const IconThemeData(color: Colors.white), 
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Display the image of the news
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: newsModel.urlToImage != null && newsModel.urlToImage!.isNotEmpty
@@ -76,8 +74,6 @@ class NewsDetail extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-
-            // Display the title of the news
             Text(
               newsModel.title ?? "No Title Available",
               style: const TextStyle(
@@ -86,8 +82,6 @@ class NewsDetail extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 5),
-
-            // Display the time since publication
             Text(
               "Published: ${getTimeAgo(newsModel.publishedAt)}",
               style: const TextStyle(
@@ -96,8 +90,6 @@ class NewsDetail extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-
-            // Display the content of the news, if available
             Text(
               newsModel.content ?? "No content available.",
               style: const TextStyle(fontSize: 16),
