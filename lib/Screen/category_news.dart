@@ -3,7 +3,7 @@ import 'package:news_app/Screen/news_detail.dart';
 import 'package:news_app/Services/services.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../model/new_model.dart';
-import 'package:news_app/Services/database_helper.dart'; // Add import for DatabaseHelper
+import 'package:news_app/Services/database_helper.dart'; 
 
 class SelectedCategoryNews extends StatefulWidget {
   final String category;
@@ -17,7 +17,7 @@ class SelectedCategoryNews extends StatefulWidget {
 class _SelectedCategoryNewsState extends State<SelectedCategoryNews> {
   List<NewsModel> articles = [];
   bool isLoading = true;
-  List<NewsModel> bookmarkedArticles = []; // Use List<NewsModel> for bookmarked articles
+  List<NewsModel> bookmarkedArticles = [];
 
   Future<void> getCategoryNews() async {
     try {
@@ -37,14 +37,14 @@ class _SelectedCategoryNewsState extends State<SelectedCategoryNews> {
 
   Future<void> loadBookmarks() async {
     final dbHelper = DatabaseHelper();
-    final bookmarks = await dbHelper.getBookmarks(); // Fetch bookmarks from DB
+    final bookmarks = await dbHelper.getBookmarks();
     setState(() {
       bookmarkedArticles = bookmarks;
     });
   }
 
   bool isBookmarked(NewsModel article) {
-    return bookmarkedArticles.any((a) => a.title == article.title); // Check if article is bookmarked
+    return bookmarkedArticles.any((a) => a.title == article.title); 
   }
 
   Future<void> toggleBookmark(NewsModel article) async {
@@ -54,7 +54,7 @@ class _SelectedCategoryNewsState extends State<SelectedCategoryNews> {
     } else {
       await dbHelper.addBookmark(article);
     }
-    await loadBookmarks(); // Refresh bookmarks
+    await loadBookmarks(); 
   }
 
   String getTimeAgo(String? publishedAt) {
@@ -71,7 +71,7 @@ class _SelectedCategoryNewsState extends State<SelectedCategoryNews> {
   void initState() {
     super.initState();
     getCategoryNews();
-    loadBookmarks(); // Load saved bookmarks when the screen initializes
+    loadBookmarks(); 
   }
 
   @override
@@ -184,7 +184,7 @@ class _SelectedCategoryNewsState extends State<SelectedCategoryNews> {
                                     : Colors.green,
                               ),
                               onPressed: () {
-                                toggleBookmark(article); // Toggle bookmark
+                                toggleBookmark(article); 
                               },
                             ),
                           ],
