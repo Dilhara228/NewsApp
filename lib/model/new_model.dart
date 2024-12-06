@@ -15,7 +15,6 @@ class NewsModel {
     this.publishedAt,
   });
 
-  // Convert NewsModel to a Map (for SQLite)
   Map<String, dynamic> toMap() {
     return {
       'title': title,
@@ -27,7 +26,6 @@ class NewsModel {
     };
   }
 
-  // Create a NewsModel from a Map (from SQLite)
   factory NewsModel.fromMap(Map<String, dynamic> map) {
     return NewsModel(
       title: map['title'],
