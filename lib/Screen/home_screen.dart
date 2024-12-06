@@ -22,11 +22,11 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   List<CategoryModel> categories = [];
   List<NewsModel> bookmarkedArticles = [];
   bool isLoading = true;
-  String sortOrder = 'desc'; // Sorting option ('asc' or 'desc')
+  String sortOrder = 'desc'; 
 
-  int _selectedIndex = 0; // Bottom Navigation Bar Index
-  TextEditingController _searchController = TextEditingController(); // Controller for search input
-  bool isSearching = false; // To track whether search bar is visible
+  int _selectedIndex = 0; 
+  TextEditingController _searchController = TextEditingController(); 
+  bool isSearching = false; 
 
   Future<void> getNews() async {
     try {
@@ -48,7 +48,6 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
         }
       }).toList();
 
-      // Sort articles based on the sortOrder
       if (sortOrder == 'asc') {
         articles.sort((a, b) => DateTime.parse(a.publishedAt!).compareTo(DateTime.parse(b.publishedAt!)));
       } else {
@@ -72,21 +71,17 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
     final dbHelper = DatabaseHelper();
 
     if (bookmarkedArticles.contains(article)) {
-      // Remove from the database and local list
       await dbHelper.removeBookmark(article.title!);
       setState(() {
         bookmarkedArticles.remove(article);
       });
     } else {
-      // Attempt to add to the database and handle duplicates
       final result = await dbHelper.addBookmark(article);
       if (result > 0) {
-        // Only add to local list if successfully added to the database
         setState(() {
           bookmarkedArticles.add(article);
         });
       } else {
-        // Optionally, show a message if already bookmarked
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('This article is already saved!')),
         );
@@ -108,12 +103,10 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   }
 
   void changeSortOrder() {
-    setState(() {
-      // Toggle the sort order between 'asc' and 'desc'
+    setState(() 
       sortOrder = sortOrder == 'asc' ? 'desc' : 'asc';
     });
-
-    // Re-fetch and sort the news articles based on the updated sortOrder
+    
     getNews();
   }
 
@@ -122,7 +115,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
     super.initState();
     categories = getCategories();
     getNews();
-    loadBookmarks(); // Load bookmarks from the database
+    loadBookmarks(); 
   }
 
 // Load saved bookmarks
@@ -149,7 +142,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(56.0), // Matching the height of the bottom navigation bar
+        preferredSize: const Size.fromHeight(56.0), 
         child: AppBar(
           title: isSearching
               ? TextField(
@@ -157,10 +150,10 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
             onChanged: filterNews,
             decoration: InputDecoration(
               hintText: 'Search news...',
-              hintStyle: const TextStyle(color: Colors.white70), // Hint text color
-              prefixIcon: const Icon(Icons.search, color: Colors.white), // Search icon color
+              hintStyle: const TextStyle(color: Colors.white70), 
+              prefixIcon: const Icon(Icons.search, color: Colors.white), 
               suffixIcon: IconButton(
-                icon: const Icon(Icons.close, color: Colors.white), // Close icon color
+                icon: const Icon(Icons.close, color: Colors.white), 
                 onPressed: () {
                   setState(() {
                     isSearching = false;
@@ -170,15 +163,15 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                 },
               ),
               filled: true,
-              fillColor: Colors.white.withOpacity(0.1), // Background color of the box
-              contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15), // Compact size
+              fillColor: Colors.white.withOpacity(0.1), 
+              contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15), 
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(color: Colors.white), // Border color
+                borderSide: const BorderSide(color: Colors.white), 
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(color: Colors.white), // Focused border color
+                borderSide: const BorderSide(color: Colors.white), 
               ),
             ),
           )
@@ -186,7 +179,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
             "News",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
-          backgroundColor: Colors.green, // Silver color for AppBar
+          backgroundColor: Colors.green, 
           elevation: 0,
           actions: [
             if (!isSearching)
@@ -396,7 +389,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
             label: 'Refresh',
           ),
         ],
-        iconSize: 20, // Slightly smaller icons
+        iconSize: 20, 
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
       ),
