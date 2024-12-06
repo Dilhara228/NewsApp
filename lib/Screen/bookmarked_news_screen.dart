@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/Screen/news_detail.dart';
-import 'package:news_app/model/new_model.dart'; // Ensure you're importing the NewsModel
-import 'package:news_app/Services/database_helper.dart'; // Ensure DatabaseHelper is correctly imported
+import 'package:news_app/model/new_model.dart'; 
+import 'package:news_app/Services/database_helper.dart'; 
 import 'package:timeago/timeago.dart' as timeago;
 
 class BookmarkedNewsScreen extends StatefulWidget {
@@ -76,12 +76,11 @@ class _BookmarkedNewsScreenState extends State<BookmarkedNewsScreen> {
         ),
         iconTheme: const IconThemeData(color: Colors.white),
         actions: [
-          // Sorting Popup Menu
-          PopupMenuButton<String>(
+           PopupMenuButton<String>(
             onSelected: (value) {
               setState(() {
                 sortCriteria = value;
-                sortArticles(); // Sort based on the selected criteria
+                sortArticles(); 
               });
             },
             itemBuilder: (context) => [
@@ -115,7 +114,6 @@ class _BookmarkedNewsScreenState extends State<BookmarkedNewsScreen> {
             ),
             child: GestureDetector(
               onTap: () {
-                // View news details on click
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -124,7 +122,6 @@ class _BookmarkedNewsScreenState extends State<BookmarkedNewsScreen> {
                 );
               },
               onSecondaryTap: () {
-                // For middle-click-like functionality
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -135,7 +132,6 @@ class _BookmarkedNewsScreenState extends State<BookmarkedNewsScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // News Image
                   if (article.urlToImage != null)
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
@@ -156,8 +152,7 @@ class _BookmarkedNewsScreenState extends State<BookmarkedNewsScreen> {
                         color: Colors.grey,
                       ),
                     ),
-                  const SizedBox(width: 10), // Spacing between image and text
-                  // News Details
+                  const SizedBox(width: 10), 
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
