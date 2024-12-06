@@ -11,23 +11,23 @@ class BookmarkedNewsScreen extends StatefulWidget {
 
 class _BookmarkedNewsScreenState extends State<BookmarkedNewsScreen> {
   List<NewsModel> bookmarkedArticles = [];
-  String sortCriteria = "Date"; // Default sort by date
+  String sortCriteria = "Date"; 
 
   // Load saved bookmarks from the database
   Future<void> loadBookmarks() async {
     final dbHelper = DatabaseHelper();
-    final bookmarks = await dbHelper.getBookmarks(); // Fetch bookmarks from DB
+    final bookmarks = await dbHelper.getBookmarks(); 
     setState(() {
-      bookmarkedArticles = bookmarks; // Ensure bookmarks are updated in the list
-      sortArticles(); // Sort articles based on selected criteria
+      bookmarkedArticles = bookmarks; 
+      sortArticles(); 
     });
   }
 
   // Delete a bookmarked article
   Future<void> deleteArticle(NewsModel article) async {
     final dbHelper = DatabaseHelper();
-    await dbHelper.removeBookmark(article.title!); // Remove bookmark from DB based on title or identifier
-    loadBookmarks(); // Refresh the bookmark list after removal
+    await dbHelper.removeBookmark(article.title!); 
+    loadBookmarks();
   }
 
   // Sort articles based on the selected criteria
@@ -56,7 +56,7 @@ class _BookmarkedNewsScreenState extends State<BookmarkedNewsScreen> {
   @override
   void initState() {
     super.initState();
-    loadBookmarks(); // Load bookmarks when screen initializes
+    loadBookmarks(); 
   }
 
   @override
