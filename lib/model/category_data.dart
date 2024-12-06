@@ -1,14 +1,9 @@
-// Define the CategoryModel class
 class CategoryModel {
-  String? categoryName;
-
-  // Constructor to initialize the category name
+  String? categoryName
   CategoryModel({this.categoryName});
 }
 
-// Function to get a list of news categories
 List<CategoryModel> getCategories() {
-  // List to hold categories
   List<CategoryModel> categories = [];
 
   // Adding each category
